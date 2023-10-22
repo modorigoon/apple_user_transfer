@@ -125,7 +125,7 @@ def save_error_logs():
     log_file_name = f'transfer_failed_{datetime.now().strftime("%Y%m%d%H%M")}.err'
     with open(log_file_name, 'w') as err_file:
         err_file.writelines(errors)
-    print(colored(f'{len(errors)} sub transfer failed (log file: {log_file_name}', 'red'))
+    print(colored(f'{len(errors)} sub transfer failed (log file: {log_file_name})', 'red'))
 
 
 def transfer(apple: Apple, options: dict):
