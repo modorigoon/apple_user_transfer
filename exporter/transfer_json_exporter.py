@@ -3,7 +3,7 @@ from exporter.exporter import Exporter
 from datetime import datetime
 
 
-class JsonExporter(Exporter):
+class TransferJsonExporter(Exporter):
 
     def __init__(self, file_name):
         if file_name is None or file_name == '':

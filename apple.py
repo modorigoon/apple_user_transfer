@@ -9,7 +9,7 @@ from termcolor import colored
 
 class Apple:
 
-    def __init__(self, private_key_file: str, team_id: str, key_id: str, client_id: str, target_team_id: str):
+    def __init__(self, private_key_file: str, team_id: str, key_id: str, client_id: str, target_team_id: str|None):
         self.__private_key_file: Final = private_key_file
         self.__team_id: Final = team_id
         self.__key_id: Final = key_id
@@ -81,6 +81,23 @@ class Apple:
         body = {
             'sub': sub,
             'target': self.__target_team_id,
+            'client_id': self.__client_id,
+            'client_secret': self.__client_secret
+        }
+        request_url = f'{self.__APPLE_API_BASE_URL}/auth/usermigrationinfo'
+        try:
+            resource = requests.post(request_url, headers=headers, data=body)
+            return json.loads(resource.text)
+        except Exception as e:
+            return {'error': 'request_error', 'error_description': str(e)}
+
+    def sub_migration(self, transfer_sub: str):
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': f'Bearer {self.__access_token}'
+        }
+        body = {
+            'transfer_sub': transfer_sub,
             'client_id': self.__client_id,
             'client_secret': self.__client_secret
         }

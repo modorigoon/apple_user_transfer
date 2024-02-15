@@ -3,7 +3,7 @@ from datetime import datetime
 from exporter.exporter import Exporter
 
 
-class XmlExporter(Exporter):
+class TransferXmlExporter(Exporter):
 
     def __init__(self, file_name):
         if file_name is None or file_name == '':
